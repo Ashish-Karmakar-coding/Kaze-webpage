@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation | Kaze CLI</title>
+    <meta name="description" content="Documentation for Kaze CLI - Learn how to install, host, and download securely using Cloudflare Tunnels.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="docs-page">
+    <header class="docs-header-bar">
+        <nav class="container">
+            <div class="logo">
+                <a href="index.html" style="display:flex; align-items:center; gap:0.5rem; text-decoration:none; color:inherit;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="logo-icon"><path d="M17.5 19c-1.5 0-2.5-1-2.5-2.5a2.5 2.5 0 1 1 5 0c0 1.5-1 2.5-2.5 2.5Z"></path><path d="M17.5 14H3"></path><path d="M21 9.5c0-1.5-1-2.5-2.5-2.5a2.5 2.5 0 1 0-2.5 2.5h15"></path><path d="M21 4.5c0-1.5-1-2.5-2.5-2.5a2.5 2.5 0 1 0-2.5 2.5h15"></path></svg>
+                    <span>Kaze</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="docs container">
+        <div class="docs-grid">
+            <aside class="docs-nav fade-up">
+                <div class="nav-group">
+                    <h3>Getting Started</h3>
+                    <a href="#doc-install" class="active">Installation</a>
+                    <a href="#doc-prereq">Prerequisites</a>
+                </div>
+                <div class="nav-group">
+                    <h3>Usage Guide</h3>
+                    <a href="#doc-host">Hosting Files</a>
+                    <a href="#doc-get">Downloading Files</a>
+                </div>
+                <div class="nav-group">
+                    <h3>Architecture</h3>
+                    <a href="#doc-security">Security & Under the Hood</a>
+                </div>
+            </aside>
+
+            <div class="docs-content fade-up delay-1">
+                <div class="docs-intro">
+                    <h1 class="docs-title">Documentation</h1>
+                    <p class="docs-subtitle">Everything you need to know to securely share and receive files using Kaze.</p>
+                </div>
+
+                <div id="doc-install" class="doc-section">
+                    <h2>Installation</h2>
+                    <p>Kaze is distributed as a global npm package. You need Node.js installed on your system.</p>
+                    <div class="code-block">
+                        <div class="code-top">Bash</div>
+                        <div class="code-inner">
+                            <code id="install-full">npm install -g kaze-share</code>
+                            <button class="copy-btn" data-target="install-full" aria-label="Copy">Copy</button>
+                        </div>
+                    </div>
+                    <p class="note">If you get a <code>command not found</code> error on Windows, ensure your npm global bin folder is in your system PATH.</p>
+                </div>
+
+                <div id="doc-prereq" class="doc-section">
+                    <h2>Prerequisites</h2>
+                    <p>To use Kaze, you need to understand the two roles: <strong>The Host</strong> (sharing) and <strong>The Receiver</strong> (downloading).</p>
+                    
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Requirement</th>
+                                    <th>The Host</th>
+                                    <th>The Receiver</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Node.js (v18+)</td>
+                                    <td>✅ Required</td>
+                                    <td>✅ Required</td>
+                                </tr>
+                                <tr>
+                                    <td>Kaze CLI</td>
+                                    <td>✅ Required</td>
+                                    <td>✅ Required</td>
+                                </tr>
+                                <tr>
+                                    <td>cloudflared</td>
+                                    <td>✅ Required</td>
+                                    <td>❌ Not Needed</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3>Installing cloudflared (Hosts only)</h3>
+                    <p>The host machine must have the Cloudflare Tunnel daemon installed and available on their system PATH.</p>
+                    <a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/" target="_blank" class="text-link">Download cloudflared here →</a>
+                </div>
+
+                <div id="doc-host" class="doc-section">
+                    <h2>Hosting Files</h2>
+                    <p>Navigate to the directory you want to share using your terminal.</p>
+                    
+                    <h3>1. Initialize</h3>
+                    <p>Run this once per folder. It creates a hidden <code>.kaze/config.json</code> file (which is automatically added to gitignore rules).</p>
+                    <div class="code-block">
+                        <div class="code-inner">
+                            <code>kaze init</code>
+                        </div>
+                    </div>
+
+                    <h3>2. Set a Password</h3>
+                    <p>Protect your files. The password is hashed using bcrypt before being saved to the config.</p>
+                    <div class="code-block">
+                        <div class="code-inner">
+                            <code>kaze set-password mySecurePassword123</code>
+                        </div>
+                    </div>
+
+                    <h3>3. Start Sharing</h3>
+                    <p>This spins up a local Express server and a Cloudflare Tunnel simultaneously.</p>
+                    <div class="code-block">
+                        <div class="code-inner">
+                            <code>kaze host</code>
+                        </div>
+                    </div>
+                    <p>Copy the generated <code>trycloudflare.com</code> URL and send it to your recipient along with the password. Keep this terminal open to keep the tunnel alive.</p>
+                </div>
+
+                <div id="doc-get" class="doc-section">
+                    <h2>Downloading Files</h2>
+                    <p>The receiver needs to run the <code>get</code> command using the URL and password provided by the host.</p>
+                    
+                    <div class="code-block">
+                        <div class="code-inner">
+                            <code id="cmd-get">kaze get https://random-words.trycloudflare.com mySecurePassword123</code>
+                            <button class="copy-btn" data-target="cmd-get" aria-label="Copy">Copy</button>
+                        </div>
+                    </div>
+
+                    <h3>Custom Output Directory</h3>
+                    <p>By default, files are extracted into the current working directory. You can specify a different folder using the <code>-o</code> flag.</p>
+                    <div class="code-block">
+                        <div class="code-inner">
+                            <code>kaze get &lt;url&gt; &lt;pw&gt; -o ./downloaded-files</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="doc-security" class="doc-section">
+                    <h2>Security & Architecture</h2>
+                    <p>Kaze is designed to be completely trustless. Your data never touches our servers because we don't have any.</p>
+                    
+                    <ul class="styled-list">
+                        <li><strong>Local Processing:</strong> When a request hits your local Express server, <code>tar-fs</code> begins dynamically packing your folder into a tarball and pipes it directly into the HTTP response.</li>
+                        <li><strong>Zero RAM Footprint:</strong> Because the files are piped dynamically as a stream, you can share a 50GB folder on a laptop with 4GB of RAM without crashing.</li>
+                        <li><strong>Bcrypt Authentication:</strong> The host's password is hashed locally. When the receiver connects, the Express middleware verifies the provided password against the hash.</li>
+                        <li><strong>Cloudflare Tunnels:</strong> The <code>cloudflared</code> binary creates an outbound-only connection from your machine to Cloudflare's edge, bypassing NAT and firewall restrictions safely without opening local ports. All data is automatically SSL/TLS encrypted.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19c-1.5 0-2.5-1-2.5-2.5a2.5 2.5 0 1 1 5 0c0 1.5-1 2.5-2.5 2.5Z"></path><path d="M17.5 14H3"></path><path d="M21 9.5c0-1.5-1-2.5-2.5-2.5a2.5 2.5 0 1 0-2.5 2.5h15"></path><path d="M21 4.5c0-1.5-1-2.5-2.5-2.5a2.5 2.5 0 1 0-2.5 2.5h15"></path></svg>
+                <span>Kaze</span>
+            </div>
+            <p>Built for developers. Open source under the MIT License.</p>
+            <p class="copyright">&copy; 2026 Kaze CLI.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

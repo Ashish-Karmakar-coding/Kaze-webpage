@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaze | Instant P2P Folder Sharing</title>
+    <meta name="description" content="Share any local folder instantly over the internet via Cloudflare Tunnels — no uploads, no cloud storage, no account needed.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="home-page">
+    <div class="grid-background"></div>
+    <div class="glow-bg"></div>
+
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <a href="index.html" style="display:flex; align-items:center; gap:0.5rem; text-decoration:none; color:inherit;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="logo-icon"><path d="M17.5 19c-1.5 0-2.5-1-2.5-2.5a2.5 2.5 0 1 1 5 0c0 1.5-1 2.5-2.5 2.5Z"></path><path d="M17.5 14H3"></path><path d="M21 9.5c0-1.5-1-2.5-2.5-2.5a2.5 2.5 0 1 0-2.5 2.5h15"></path><path d="M21 4.5c0-1.5-1-2.5-2.5-2.5a2.5 2.5 0 1 0-2.5 2.5h15"></path></svg>
+                    <span>Kaze</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="docs.html">Documentation</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero container">
+            <div class="hero-content">
+                <div class="hero-badge fade-up">v1.0.0 is live</div>
+                <h1 class="hero-title fade-up delay-1">Secure P2P File Sharing. <br><span class="text-gradient">Zero Uploads.</span></h1>
+                <p class="hero-subtitle fade-up delay-2">Kaze is a developer-first CLI tool that streams massive local folders directly to anyone over the internet using Cloudflare Tunnels. No cloud storage, no file size limits, zero RAM bottlenecks.</p>
+                
+                <div class="hero-actions fade-up delay-3">
+                    <div class="install-pill">
+                        <span class="prompt">$</span>
+                        <code id="hero-install">npm install -g kaze-share</code>
+                        <button class="copy-btn" data-target="hero-install" aria-label="Copy">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        </button>
+                    </div>
+                    <a href="docs.html" class="btn-primary">Read the Docs</a>
+                </div>
+            </div>
+
+            <div class="terminal-wrapper fade-up delay-4">
+                <div class="terminal-container">
+                    <div class="terminal">
+                        <div class="terminal-header">
+                            <div class="traffic-lights">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <div class="terminal-title">~/projects/kaze</div>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="line"><span class="prompt">❯</span> <span class="cmd">kaze host</span></div>
+                            <div class="line"><span class="dim">  ⚡ Kaze</span></div>
+                            <div class="line"><span class="dim">  Sharing: /home/kenshin/projects/kaze</span></div>
+                            <div class="line"></div>
+                            <div class="line"><span class="success">✔</span> Server running on localhost:54321</div>
+                            <div class="line"><span class="success">✔</span> Tunnel established</div>
+                            <div class="line"></div>
+                            <div class="line">  🌐 <span class="bold">Hosted Link:</span>  <span class="url">https://rapid-wind.trycloudflare.com/download</span></div>
+                            <div class="line">  🔒 <span class="dim">Password protected.</span></div>
+                            <div class="line"></div>
+                            <div class="line">  <span class="dim">Press</span> <span class="bold">Ctrl+C</span> <span class="dim">to stop sharing.</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
